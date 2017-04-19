@@ -90,10 +90,28 @@ public class SchedulerAlgorithm {
     }
 
 
-    public int[][] computeSchedulingOutputMatrix() {
+    public int[][] computeSchedulingOutputMatrix(int[][] inputTimeMatrix) {
 
-        return null;
+        List<Machinery> machineries = prodLine.getMachineryList();
+
+        int colDim = prodLine.getMachineryList().size();
+        int lineDim = products.size();
+
+        int[][] outputTimeMatrix = new int[lineDim][colDim];
+
+        for (int i = 0; i < products.size(); i++)
+            for (int j = 0; j < machineries.size(); j++) {
+
+                //check if the products needs the machinery component
+                List<Component> MachineryComponents = machineries.get(j).getComponents();
+
+                for (Component comp : MachineryComponents) {
+                    if (AssembledProduct.checkNecessaryComponent(comp, products.get(i))) {
+                           outputTimeMatrix[i][j] = inputTimeMatrix[i][j] + comp.getAssemblyTime();
+                    }
+                }
+
+            }
+        return outputTimeMatrix;
     }
-
-
 }

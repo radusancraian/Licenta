@@ -81,13 +81,14 @@ public class MainClass {
         products.add(p3);
 
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
-        int[][] matrix;
+        int[][] inputMatrix, outputMatrix;
 
-        matrix = algo.computeSchedulingInputMatrix();
-        System.out.println("Input time");
+        inputMatrix = algo.computeSchedulingInputMatrix();
+        outputMatrix = algo.computeSchedulingOutputMatrix(inputMatrix);
+         System.out.println("Input time");
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
-                System.out.println(matrix[i][j] + " ");
+                System.out.println(inputMatrix[i][j] + " ");
             }
             System.out.println();
         }
