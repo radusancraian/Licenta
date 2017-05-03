@@ -10,10 +10,30 @@ public class SchedulerAlgorithm {
 
     private ProductionLine prodLine;
     private List<Product> products = new ArrayList<>();
+    private int[][] inputMatrix;
+    private int[][] outputMatrix;
 
     public SchedulerAlgorithm(List<Product> products, ProductionLine prodLine) {
         this.products = products;
         this.prodLine = prodLine;
+        inputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
+        outputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
+    }
+
+    public int[][] getInputMatrix() {
+        return inputMatrix;
+    }
+
+    public void setInputMatrix(int[][] inputMatrix) {
+        this.inputMatrix = inputMatrix;
+    }
+
+    public int[][] getOutputMatrix() {
+        return outputMatrix;
+    }
+
+    public void setOutputMatrix(int[][] outputMatrix) {
+        this.outputMatrix = outputMatrix;
     }
 
     public ProductionLine getProdLine() {
@@ -32,27 +52,27 @@ public class SchedulerAlgorithm {
         this.products = products;
     }
 
-    public int[][] computeSchedulingInputMatrix() {
-        List<Machinery> machineries = prodLine.getMachineryList();
+    public void computeSchedulingInputOutputMatrices() {
 
         int colDim = prodLine.getMachineryList().size();
         int lineDim = products.size();
-
-        int[][] inputTimeMatrix = new int[lineDim][colDim];
-
-        int col = 0;
-        inputTimeMatrix[0][0] = 0;
+        inputMatrix[0][0] = 0;
         Product firstProd = products.get(0);
+        List<Machinery> machineries = prodLine.getMachineryList();
 
         //generate first line for the first product
-        for (int i = 1; i < machineries.size(); i++) {
+        for (int i = 1; i <= machineries.size(); i++) {
 
             //check if the products needs the machinery component
             List<Component> machineryComponents = machineries.get(i - 1).getComponents();
 
             for (Component comp : machineryComponents) {
                 if (AssembledProduct.checkNecessaryComponent(comp, firstProd)) {
-                    inputTimeMatrix[0][i] = inputTimeMatrix[0][i - 1] + comp.getAssemblyTime();
+                    if (i != machineries.size()) {
+                        inputMatrix[0][i] = outputMatrix[0][i - 1] = inputMatrix[0][i - 1] + comp.getAssemblyTime();
+                    } else {
+                        outputMatrix[0][i - 1] = inputMatrix[0][i - 1] + comp.getAssemblyTime();
+                    }
                 }
             }
 
@@ -61,8 +81,19 @@ public class SchedulerAlgorithm {
         //generate first col for the first product
         for (int i = 1; i < products.size(); i++) {
 
-            inputTimeMatrix[i][0] = inputTimeMatrix[i - 1][0] + products.get(i - 1).getComponents().get(0).getAssemblyTime();
+            //check if the products needs the machinery component
+            List<Component> machineryComponents = machineries.get(0).getComponents();
+
+            for (Component comp : machineryComponents) {
+                if (AssembledProduct.checkNecessaryComponent(comp, products.get(i - 1))) {
+                    inputMatrix[i][0] = inputMatrix[i - 1][0] + comp.getAssemblyTime();
+                }
+                if (AssembledProduct.checkNecessaryComponent(comp, products.get(i))) {
+                    outputMatrix[i][0] = inputMatrix[i][0] + comp.getAssemblyTime();
+                }
+            }
         }
+
 
         for (int i = 1; i < products.size(); i++)
             for (int j = 1; j < machineries.size(); j++) {
@@ -71,50 +102,17 @@ public class SchedulerAlgorithm {
                 List<Component> MachineryComponents = machineries.get(j - 1).getComponents();
                 for (Component comp : MachineryComponents) {
                     if (AssembledProduct.checkNecessaryComponent(comp, products.get(i))) {
-                        if (j + 1 < colDim)
-                            inputTimeMatrix[i][j] = Math.max(inputTimeMatrix[i][j - 1] + comp.getAssemblyTime()
-                                    , inputTimeMatrix[i - 1][j + 1]);
-                            //last column
-                        else {
-                            List<Component> LastMachineryComponents = machineries.get(j).getComponents();
-                            for (Component compLast : LastMachineryComponents) {
-                                if (AssembledProduct.checkNecessaryComponent(compLast, products.get(i - 1))) {
-                                    inputTimeMatrix[i][j] = Math.max(inputTimeMatrix[i][j - 1] + comp.getAssemblyTime()
-                                            , inputTimeMatrix[i][j - 1] + compLast.getAssemblyTime());
-                                }
+                        inputMatrix[i][j] = Math.max(inputMatrix[i][j - 1] + comp.getAssemblyTime()
+                                , outputMatrix[i - 1][j]);
+                        List<Component> currentMachineryComponents = machineries.get(j).getComponents();
+                        for (Component currentComp : currentMachineryComponents) {
+                            if (AssembledProduct.checkNecessaryComponent(currentComp, products.get(i))) {
+                                outputMatrix[i][j] = inputMatrix[i][j] + currentComp.getAssemblyTime();
                             }
                         }
                     }
                 }
 
-    }
-
-        return inputTimeMatrix;
-}
-
-
-    public int[][] computeSchedulingOutputMatrix(int[][] inputTimeMatrix) {
-
-        List<Machinery> machineries = prodLine.getMachineryList();
-
-        int colDim = prodLine.getMachineryList().size();
-        int lineDim = products.size();
-
-        int[][] outputTimeMatrix = new int[lineDim][colDim];
-
-        for (int i = 0; i < products.size(); i++)
-            for (int j = 0; j < machineries.size(); j++) {
-
-                //check if the products needs the machinery component
-                List<Component> MachineryComponents = machineries.get(j).getComponents();
-
-                for (Component comp : MachineryComponents) {
-                    if (AssembledProduct.checkNecessaryComponent(comp, products.get(i))) {
-                        outputTimeMatrix[i][j] = inputTimeMatrix[i][j] + comp.getAssemblyTime();
-                    }
-                }
-
             }
-        return outputTimeMatrix;
     }
 }

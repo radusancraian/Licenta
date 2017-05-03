@@ -107,9 +107,9 @@ public class MainClass {
 
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
         int[][] inputMatrix, outputMatrix;
-
-        inputMatrix = algo.computeSchedulingInputMatrix();
-        outputMatrix = algo.computeSchedulingOutputMatrix(inputMatrix);
+         algo.computeSchedulingInputOutputMatrices();
+        inputMatrix = algo.getInputMatrix();
+        outputMatrix = algo.getOutputMatrix();
          System.out.println("Input time");
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
@@ -117,8 +117,5 @@ public class MainClass {
             }
             System.out.println();
         }
-
-
-
     }
 }
