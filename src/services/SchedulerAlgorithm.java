@@ -1,10 +1,10 @@
 package services;
 
 
+import com.sun.org.apache.bcel.internal.generic.LUSHR;
 import entities.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SchedulerAlgorithm {
 
@@ -16,8 +16,6 @@ public class SchedulerAlgorithm {
     public SchedulerAlgorithm(List<Product> products, ProductionLine prodLine) {
         this.products = products;
         this.prodLine = prodLine;
-        inputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
-        outputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
     }
 
     public int[][] getInputMatrix() {
@@ -52,7 +50,12 @@ public class SchedulerAlgorithm {
         this.products = products;
     }
 
+
+    //get input and output processing time
     public void computeSchedulingInputOutputMatrices() {
+
+        inputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
+        outputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
 
         int colDim = prodLine.getMachineryList().size();
         int lineDim = products.size();

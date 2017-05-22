@@ -1,9 +1,6 @@
 package services;
 
-import entities.Component;
-import entities.Machinery;
-import entities.Product;
-import entities.ProductionLine;
+import entities.*;
 
 import java.util.*;
 
@@ -77,45 +74,20 @@ public class MainClass {
         products.add(p1);
         products.add(p2);
         products.add(p3);
-        Map<Product, Integer>  ProductsStock = new HashMap<>();
+        HashMap<Product, Integer>  ProductsAndStock = new HashMap<>();
 
-        ProductsStock.put(products.get(0), 3);
-        ProductsStock.put(products.get(1), 4);
-        ProductsStock.put(products.get(2), 5);
-
-        List<Product> Solution = new ArrayList<>();
-
-        Random rn = new Random();
-        int k = 0;
-        for (int i = 0 ;  i <= 11; i++)
-        {
-            boolean OK = true;
-            while( OK )
-            {
-                int product = Math.abs(rn.nextInt() % 3 );
-                if( ProductsStock.get(products.get(product)) > 0)
-                    {
-                        Solution.add(k,products.get(product));
-                        int stock = ProductsStock.get(products.get(product)) - 1;
-                        ProductsStock.remove(products.get(product));
-                        ProductsStock.put(products.get(product), stock);
-                        k++;
-                    }
-               else OK = false;
-            }
-        }
+        ProductsAndStock.put(products.get(0), 3);
+        ProductsAndStock.put(products.get(1), 4);
+        ProductsAndStock.put(products.get(2), 5);
 
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
-        int[][] inputMatrix, outputMatrix;
-         algo.computeSchedulingInputOutputMatrices();
-        inputMatrix = algo.getInputMatrix();
-        outputMatrix = algo.getOutputMatrix();
-         System.out.println("Input time");
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.println(inputMatrix[i][j] + " ");
-            }
-            System.out.println();
-        }
+        SolutionServices solService = new SolutionServices();
+        List<Solution> solutions;
+
+        solutions = solService.generateRandomSolutions(ProductsAndStock, 12, products, algo);
+        solutions = solService.sortSolutionsByProcessingTime(solutions);
+
+
+
     }
 }
