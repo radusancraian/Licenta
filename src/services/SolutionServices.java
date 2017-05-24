@@ -10,7 +10,8 @@ public class SolutionServices {
 
 
     //generate a random solution
-    public Solution generateRandomSolution(HashMap<Product, Integer> ProductsAndStock, int nrProducts, List<Product> products) {
+    public Solution generateRandomSolution(HashMap<Product, Integer> ProductsAndStock, int nrProducts,
+                                           List<Product> products) {
         Solution sol = new Solution();
 
         Random rn = new Random();
@@ -25,19 +26,20 @@ public class SolutionServices {
                     ProductsAndStock.remove(products.get(product));
                     ProductsAndStock.put(products.get(product), stock);
                     k++;
-                } else OK = false;
+                    OK = false;
+                }
             }
         }
         return sol;
     }
 
-
     //generate more random solutions
-    public List<Solution> generateRandomSolutions(HashMap<Product, Integer> ProductsWithStock, int nrProducts, List<Product> products, SchedulerAlgorithm algo) {
+    public List<Solution> generateRandomSolutions(HashMap<Product, Integer> ProductsWithStock, int nrProducts,
+                                                  List<Product> products, SchedulerAlgorithm algo, int nrSol) {
         List<Solution> solutions = new ArrayList<>();
         HashMap<Product, Integer> ProdStock;
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= nrSol; i++) {
 
             //create a new stock for each solution
             ProdStock = new HashMap<>(ProductsWithStock);
@@ -57,6 +59,7 @@ public class SolutionServices {
     }
 
 
+    //sort solutions by processing time
     public List<Solution> sortSolutionsByProcessingTime(List<Solution> solutions) {
         Collections.sort(solutions);
 

@@ -80,13 +80,29 @@ public class MainClass {
         ProductsAndStock.put(products.get(1), 4);
         ProductsAndStock.put(products.get(2), 5);
 
+        int allStock = 0;
+        for (int s : ProductsAndStock.values()) {
+            allStock += s;
+        }
+
+
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
         SolutionServices solService = new SolutionServices();
-        List<Solution> solutions;
+        List<Solution> solutions, newRandomSolutions;
 
-        solutions = solService.generateRandomSolutions(ProductsAndStock, 12, products, algo);
+        solutions = solService.generateRandomSolutions(ProductsAndStock, 12, products, algo, 10);
         solutions = solService.sortSolutionsByProcessingTime(solutions);
 
+        newRandomSolutions = solService.generateRandomSolutions(ProductsAndStock, allStock,   products, algo, solutions.size() / 2);
+
+        //add new random solutions on the second half of population
+        for(int i  = solutions.size() / 2 ;  i <= solutions.size() - 1 ;  i++)
+        {
+            solutions.set(i, newRandomSolutions.get( i - solutions.size() /2 ));
+        }
+
+        //sort the new Population
+        solutions = solService.sortSolutionsByProcessingTime(solutions);
 
 
     }
