@@ -68,27 +68,40 @@ public class SolutionServices {
 
 
     //crossOver functionality
-    public void crossOver ( Solution s1, Solution s2) {
+    public void crossOver(Solution s1, Solution s2) {
 
         Random rn = new Random();
         int r = Math.abs(rn.nextInt() % s1.getProducts().size());
 
-        for( int i  =  r ; i < s1.getProducts().size(); i++)
-        {
-          Product p  =  s1.getProducts().get(i);
-          s1.getProducts().set(i, s2.getProducts().get(i));
-          s2.getProducts().set(i, p);
+        for (int i = r; i < s1.getProducts().size(); i++) {
+            Product p = s1.getProducts().get(i);
+            s1.getProducts().set(i, s2.getProducts().get(i));
+            s2.getProducts().set(i, p);
         }
     }
 
 
     //crossOver all Solutions
-    public void crossOverAll ( List<Solution> solutions)
-    {
+    public void crossOverAll(List<Solution> solutions) {
 
-        for( int i = 0 ; i < solutions.size(); i += 2)
-        {
+        for (int i = 0; i < solutions.size(); i += 2) {
             crossOver(solutions.get(i), solutions.get(i + 1));
+        }
+
+    }
+
+    //set stock Constraints for solutions
+    public void setStockConstraints(List<Solution> solutions) {
+
+        for (Solution s : solutions) {
+            Map<Product, Integer> prodStock = new HashMap<Product, Integer>();
+            prodStock =  new HashMap<>(s.getProductsWithStock());
+
+            for (Product p : s.getProducts()) {
+                prodStock.put(p, prodStock.get(p) - 1);
+            }
+
+            s.setStockConstraints(prodStock);
         }
 
     }

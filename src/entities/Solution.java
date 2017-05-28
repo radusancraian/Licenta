@@ -16,6 +16,16 @@ public class Solution implements Comparable<Solution> {
 
     private Map<Product, Integer> ProductsWithStock = new HashMap<>();
 
+    private Map<Product, Integer> stockConstraints = new HashMap<>(ProductsWithStock.size());
+
+    public Map<Product, Integer> getStockConstraints() {
+        return stockConstraints;
+    }
+
+    public void setStockConstraints(Map<Product, Integer> stockConstraints) {
+        this.stockConstraints = stockConstraints;
+    }
+
     public Map<Product, Integer> getProductsWithStock() {
         return ProductsWithStock;
     }
@@ -48,8 +58,7 @@ public class Solution implements Comparable<Solution> {
         this.nrProductsNotInStock = nrProductsNotInStock;
     }
 
-    public void addProduct(Product p)
-    {
+    public void addProduct(Product p) {
         this.products.add(p);
     }
 
