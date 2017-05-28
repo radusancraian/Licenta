@@ -103,7 +103,6 @@ public class MainClass {
 
         //sort the new Population
         solutions = solService.sortSolutionsByProcessingTime(solutions);
-
-
+        solService.crossOverAll(solutions);
     }
 }

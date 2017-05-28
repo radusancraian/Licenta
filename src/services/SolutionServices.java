@@ -66,4 +66,30 @@ public class SolutionServices {
         return solutions;
     }
 
+
+    //crossOver functionality
+    public void crossOver ( Solution s1, Solution s2) {
+
+        Random rn = new Random();
+        int r = Math.abs(rn.nextInt() % s1.getProducts().size());
+
+        for( int i  =  r ; i < s1.getProducts().size(); i++)
+        {
+          Product p  =  s1.getProducts().get(i);
+          s1.getProducts().set(i, s2.getProducts().get(i));
+          s2.getProducts().set(i, p);
+        }
+    }
+
+
+    //crossOver all Solutions
+    public void crossOverAll ( List<Solution> solutions)
+    {
+
+        for( int i = 0 ; i < solutions.size(); i += 2)
+        {
+            crossOver(solutions.get(i), solutions.get(i + 1));
+        }
+
+    }
 }
