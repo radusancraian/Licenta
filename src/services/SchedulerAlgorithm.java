@@ -12,6 +12,16 @@ public class SchedulerAlgorithm {
     private int[][] inputMatrix;
     private int[][] outputMatrix;
 
+    private int processingTime;
+
+    public int getProcessingTime() {
+        return processingTime;
+    }
+
+    public void setProcessingTime(int processingTime) {
+        this.processingTime = processingTime;
+    }
+
     public SchedulerAlgorithm(List<Product> products, ProductionLine prodLine) {
         this.products = products;
         this.prodLine = prodLine;
@@ -50,8 +60,8 @@ public class SchedulerAlgorithm {
     }
 
 
-    //get input and output processing time
-    public void computeSchedulingInputOutputMatrices() {
+    // set total processing time ( last element of output matrix )
+    public void computeProcessingTime() {
 
         inputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
         outputMatrix = new int[products.size()][prodLine.getMachineryList().size()];
@@ -116,5 +126,7 @@ public class SchedulerAlgorithm {
                 }
 
             }
+
+      this.processingTime =  outputMatrix[products.size() - 1][this.getProdLine().getMachineryList().size() - 1];
     }
 }

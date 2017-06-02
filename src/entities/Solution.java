@@ -1,6 +1,8 @@
 package entities;
 
 
+import services.Fitness;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,30 +10,30 @@ import java.util.Map;
 
 public class Solution implements Comparable<Solution> {
 
-    private int processingTime;
-
-    private int nrProductsNotInStock;
+    private Fitness fitnessValue;
 
     private List<Product> products = new ArrayList<Product>();
 
-    private Map<Product, Integer> ProductsWithStock = new HashMap<>();
+    private Map<Product, Integer> InitialStock = new HashMap<>();
 
-    private Map<Product, Integer> stockConstraints = new HashMap<>(ProductsWithStock.size());
-
-    public Map<Product, Integer> getStockConstraints() {
-        return stockConstraints;
+    public Map<Product, Integer> geInitialStock() {
+        return InitialStock;
     }
 
-    public void setStockConstraints(Map<Product, Integer> stockConstraints) {
-        this.stockConstraints = stockConstraints;
+    public Fitness getFitnessValue() {
+        return fitnessValue;
     }
 
-    public Map<Product, Integer> getProductsWithStock() {
-        return ProductsWithStock;
+    public void setFitnessValue(Fitness fitnessValues) {
+        this.fitnessValue = fitnessValues;
     }
 
-    public void setProductsWithStock(Map<Product, Integer> productsWithStock) {
-        ProductsWithStock = productsWithStock;
+    public Map<Product, Integer> getInitialStock() {
+        return InitialStock;
+    }
+
+    public void setInitialStock(Map<Product, Integer> InitialStock) {
+        this.InitialStock = InitialStock;
     }
 
     public List<Product> getProducts() {
@@ -42,35 +44,30 @@ public class Solution implements Comparable<Solution> {
         this.products = products;
     }
 
-    public int getProcessingTime() {
-        return processingTime;
-    }
-
-    public void setProcessingTime(int processingTime) {
-        this.processingTime = processingTime;
-    }
-
-    public int getNrProductsNotInStock() {
-        return nrProductsNotInStock;
-    }
-
-    public void setNrProductsNotInStock(int nrProductsNotInStock) {
-        this.nrProductsNotInStock = nrProductsNotInStock;
-    }
-
     public void addProduct(Product p) {
         this.products.add(p);
     }
 
+
     @Override
     public int compareTo(Solution o) {
-        if (this.getProcessingTime() > o.getProcessingTime()) {
-            return 1;
-        } else if (this.getProcessingTime() < o.getProcessingTime()) {
+        int obj1StockConstraints = this.getFitnessValue().getStockConstraints().getNrProductsNotRespectStock();
+        int obj2StockConstraints = o.getFitnessValue().getStockConstraints().getNrProductsNotRespectStock();
+        int obj1ProcessingTime = this.getFitnessValue().getProcessingTime();
+        int obj2ProcessingTime = o.getFitnessValue().getProcessingTime();
 
+        if (obj1StockConstraints < obj2StockConstraints) {
             return -1;
-
+        } else if (obj1StockConstraints > obj2StockConstraints){
+            return 1;
+        } else {
+             if(obj1ProcessingTime < obj2ProcessingTime){
+                 return -1;
+             } else if (obj1ProcessingTime > obj2ProcessingTime){
+                 return 1;
+             } else {
+                 return 0;
+             }
         }
-        return 0;
     }
 }

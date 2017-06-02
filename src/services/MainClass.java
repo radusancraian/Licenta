@@ -1,6 +1,10 @@
 package services;
 
 import entities.*;
+import geneticAlgorithm.CrossOver;
+import geneticAlgorithm.GeneticAlgorithm;
+import geneticAlgorithm.RandomSolutionsGenerator;
+import geneticAlgorithm.Selection;
 
 import java.util.*;
 
@@ -36,11 +40,11 @@ public class MainClass {
         m1.addComponent(motherBoard1);
         m1.addComponent(motherBoard2);
         m2.addComponent(cpu1);
-       // m2.addComponent(cpu2);
+        // m2.addComponent(cpu2);
         m3.addComponent(ram1);
         m3.addComponent(ram2);
         m4.addComponent(graphics1);
-       // m4.addComponent(graphics2);
+        // m4.addComponent(graphics2);
 
         //add Machineries to product line
         prodLine.addMachinery(m1);
@@ -74,36 +78,29 @@ public class MainClass {
         products.add(p1);
         products.add(p2);
         products.add(p3);
-        HashMap<Product, Integer>  ProductsAndStock = new HashMap<>();
+        HashMap<Product, Integer> ProductsAndStock = new HashMap<>();
 
         ProductsAndStock.put(products.get(0), 3);
         ProductsAndStock.put(products.get(1), 4);
         ProductsAndStock.put(products.get(2), 5);
-
-        int allStock = 0;
-        for (int s : ProductsAndStock.values()) {
-            allStock += s;
-        }
-
-
-        SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
-        SolutionServices solService = new SolutionServices();
         List<Solution> solutions, newRandomSolutions;
 
-        solutions = solService.generateRandomSolutions(ProductsAndStock, 12, products, algo, 10);
-        solutions = solService.sortSolutionsByProcessingTime(solutions);
+        SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
 
-        newRandomSolutions = solService.generateRandomSolutions(ProductsAndStock, allStock,   products, algo, solutions.size() / 2);
 
-        //add new random solutions on the second half of population
-        for(int i  = solutions.size() / 2 ;  i <= solutions.size() - 1 ;  i++)
-        {
-            solutions.set(i, newRandomSolutions.get( i - solutions.size() /2 ));
-        }
+        RandomSolutionsGenerator rndSols = new RandomSolutionsGenerator();
 
-        //sort the new Population
-        solutions = solService.sortSolutionsByProcessingTime(solutions);
-        solService.crossOverAll(solutions);
-        solService.setStockConstraints(solutions);
+        rndSols.setProcessingAlgorithm(algo);
+        rndSols.setProductsWithStock(ProductsAndStock);
+        solutions = rndSols.generateRandomSolutions(10);
+
+        GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
+        gnAlgo.setSelectionOperator(new Selection());
+        gnAlgo.setCrossOverOperator(new CrossOver());
+
+        newRandomSolutions = rndSols.generateRandomSolutions(solutions.size() / 2);
+        gnAlgo.getSelectionOperator().selectionFunctionality(solutions, newRandomSolutions);
+        gnAlgo.getCrossOverOperator().crossOverAll(solutions);
     }
+
 }
