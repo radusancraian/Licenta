@@ -16,6 +16,13 @@ public class SolutionServices {
        }
    }
 
-
+   public void computeAllProcessingTime(List<Solution> solutions, SchedulerAlgorithm algo)
+   {
+       for(Solution s : solutions) {
+           algo.setProducts(s.getProducts());
+           algo.computeProcessingTime();
+           s.getFitnessValue().setProcessingTime(algo.getProcessingTime());
+       }
+   }
 
 }

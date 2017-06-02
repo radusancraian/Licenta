@@ -77,9 +77,9 @@ public class MainClass {
         products.add(p3);
         HashMap<Product, Integer> ProductsAndStock = new HashMap<>();
 
-        ProductsAndStock.put(products.get(0), 3);
-        ProductsAndStock.put(products.get(1), 4);
-        ProductsAndStock.put(products.get(2), 5);
+        ProductsAndStock.put(products.get(0), 30);
+        ProductsAndStock.put(products.get(1), 40);
+        ProductsAndStock.put(products.get(2), 50);
         List<Solution> solutions, newRandomSolutions;
 
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
@@ -89,19 +89,24 @@ public class MainClass {
 
         rndSols.setProcessingAlgorithm(algo);
         rndSols.setProductsWithStock(ProductsAndStock);
-        solutions = rndSols.generateRandomSolutions(10);
+        solutions = rndSols.generateRandomSolutions(1000);
 
         GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
         gnAlgo.setSelectionOperator(new Selection());
         gnAlgo.setCrossOverOperator(new CrossOver());
         gnAlgo.setMutationOperator(new Mutation());
 
-        newRandomSolutions = rndSols.generateRandomSolutions(solutions.size() / 2);
-        gnAlgo.getSelectionOperator().selectionFunctionality(solutions, newRandomSolutions);
-        gnAlgo.getCrossOverOperator().crossOverAll(solutions);
-        solService.computeAllStockConstraints(solutions);
-        gnAlgo.getMutationOperator().mutationFunctionality(solutions, algo);
-        solService.computeAllStockConstraints(solutions);
+
+        for( int i = 1; i <= 50; i++) {
+            newRandomSolutions = rndSols.generateRandomSolutions(solutions.size() / 2);
+            gnAlgo.getSelectionOperator().selectionFunctionality(solutions, newRandomSolutions);
+            gnAlgo.getCrossOverOperator().crossOverAll(solutions);
+            solService.computeAllStockConstraints(solutions);
+            gnAlgo.getMutationOperator().mutationFunctionality(solutions, algo);
+            solService.computeAllStockConstraints(solutions);
+            solService.computeAllProcessingTime(solutions, algo);
+        }
+        Collections.sort(solutions);
     }
 
 }
