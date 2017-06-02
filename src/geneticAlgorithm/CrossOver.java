@@ -22,10 +22,7 @@ public class CrossOver {
             s2.getProducts().set(i, p);
         }
 
-        s1.getFitnessValue().getStockConstraints().setStockConstraints(s1);
-        s1.getFitnessValue().getStockConstraints().setNrProductsNotRespectStock();
     }
-
 
     //crossOver all Solutions
     public void crossOverAll(List<Solution> solutions) {

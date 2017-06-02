@@ -1,10 +1,7 @@
 package services;
 
 import entities.*;
-import geneticAlgorithm.CrossOver;
-import geneticAlgorithm.GeneticAlgorithm;
-import geneticAlgorithm.RandomSolutionsGenerator;
-import geneticAlgorithm.Selection;
+import geneticAlgorithm.*;
 
 import java.util.*;
 
@@ -86,7 +83,7 @@ public class MainClass {
         List<Solution> solutions, newRandomSolutions;
 
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
-
+        SolutionServices solService = new SolutionServices();
 
         RandomSolutionsGenerator rndSols = new RandomSolutionsGenerator();
 
@@ -97,10 +94,14 @@ public class MainClass {
         GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
         gnAlgo.setSelectionOperator(new Selection());
         gnAlgo.setCrossOverOperator(new CrossOver());
+        gnAlgo.setMutationOperator(new Mutation());
 
         newRandomSolutions = rndSols.generateRandomSolutions(solutions.size() / 2);
         gnAlgo.getSelectionOperator().selectionFunctionality(solutions, newRandomSolutions);
         gnAlgo.getCrossOverOperator().crossOverAll(solutions);
+        solService.computeAllStockConstraints(solutions);
+        gnAlgo.getMutationOperator().mutationFunctionality(solutions, algo);
+        solService.computeAllStockConstraints(solutions);
     }
 
 }

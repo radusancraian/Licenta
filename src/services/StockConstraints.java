@@ -9,29 +9,30 @@ import java.util.Map;
 
 public class StockConstraints {
 
-    private Map<Product, Integer> afterCrossOverStock = new HashMap<>();
+    private Map<Product, Integer> stockAfterCrossOver = new HashMap<>();
 
     private int nrProductsNotRespectStock;
 
-    public Map<Product, Integer> getAfterCrossOverStock() {
-        return afterCrossOverStock;
+    public Map<Product, Integer> getStockAfterCrossOver() {
+        return stockAfterCrossOver;
     }
 
-    public void setAfterCrossOverStock(Map<Product, Integer> afterCrossOverStock) {
-        this.afterCrossOverStock = afterCrossOverStock;
+    public void setStockAfterCrossOver(Map<Product, Integer> stockAfterCrossOver) {
+        this.stockAfterCrossOver = stockAfterCrossOver;
     }
 
     //set stock Constraints
     public void setStockConstraints(Solution s) {
 
             Map<Product, Integer> newStock;
-            newStock =  new HashMap<>(s.geInitialStock());
+            newStock =  new HashMap<>(s.getInitialStock());
 
             for (Product p : s.getProducts()) {
                 newStock.put(p, newStock.get(p) - 1);
             }
-        this.setAfterCrossOverStock(newStock);
+        this.setStockAfterCrossOver(newStock);
     }
+
 
     public int getNrProductsNotRespectStock() {
         return nrProductsNotRespectStock;
@@ -42,7 +43,7 @@ public class StockConstraints {
 
         this.nrProductsNotRespectStock = 0;
 
-        for (Integer value : this.afterCrossOverStock.values()) {
+        for (Integer value : this.stockAfterCrossOver.values()) {
 
             this.nrProductsNotRespectStock += Math.abs(value);
         }

@@ -16,7 +16,7 @@ public class Solution implements Comparable<Solution> {
 
     private Map<Product, Integer> InitialStock = new HashMap<>();
 
-    public Map<Product, Integer> geInitialStock() {
+    public Map<Product, Integer> getInitialStock() {
         return InitialStock;
     }
 
@@ -26,10 +26,6 @@ public class Solution implements Comparable<Solution> {
 
     public void setFitnessValue(Fitness fitnessValues) {
         this.fitnessValue = fitnessValues;
-    }
-
-    public Map<Product, Integer> getInitialStock() {
-        return InitialStock;
     }
 
     public void setInitialStock(Map<Product, Integer> InitialStock) {
