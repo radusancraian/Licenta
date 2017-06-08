@@ -7,8 +7,9 @@ public  class Component {
     private int assemblyTime;
     private Type type;
     private Category category;
-    public enum Category {CPU, RAM, MotherBoard, GraphicsCard};
-    public enum Type { I3, I5, I7, DDR2 , DDR3, ASUS, Skylake, NVIDIA , AMDRadeon};
+    public enum Category {CPU, RAM, MotherBoard, GraphicsCard, HardDisk, Keyboard, Housing};
+    public enum Type { I3, I5, I7, DDR2 , DDR3,  DDR4,  ASUS, Skylake, NVIDIA , AMDRadeon, MSI, HDD1TB, HDD512GB,
+    ASUSK52, ACER5250, ASUSGTX, HDD2TB, Compaq, Housing1, Housing2, Housing3};
 
     public Component(String name, Category category, Type type, int assemblyTime  )
     {
