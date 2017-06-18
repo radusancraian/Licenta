@@ -14,7 +14,7 @@ public class MainClass extends JFrame {
 
     public static void main(String[] args) {
 
-       // new MainClass();
+        // new MainClass();
 
         ProductionLine prodLine = new ProductionLine();
         List<Product> products = new ArrayList<>();
@@ -34,36 +34,36 @@ public class MainClass extends JFrame {
         List<Component> componentsLaptop4 = new ArrayList<>();
 
         Component motherBoard1, motherBoard2, motherBoard3, cpu1, cpu2, cpu3, ram1, ram2, ram3, graphics1, graphics2,
-                 graphics3, hardDiks1, hardDisk2, hardDisk3, keyboard1, keyboard2, keyboard3, housing1, housing2,
-                 housing3;
+                graphics3, hardDiks1, hardDisk2, hardDisk3, keyboard1, keyboard2, keyboard3, housing1, housing2,
+                housing3;
 
         motherBoard1 = new Component("MotherBoardASUS", Component.Category.MotherBoard, Component.Type.ASUS, 12);
-        motherBoard2 = new Component("MotherBoardSkyLake", Component.Category.MotherBoard, Component.Type.Skylake, 7);
-        motherBoard3 = new Component("MotherBoardMSI", Component.Category.MotherBoard, Component.Type.MSI, 9);
+        motherBoard2 = new Component("MotherBoardSkyLake", Component.Category.MotherBoard, Component.Type.Skylake, 34);
+        motherBoard3 = new Component("MotherBoardMSI", Component.Category.MotherBoard, Component.Type.MSI, 21);
 
-        cpu1 = new Component("Cpu1", Component.Category.CPU, Component.Type.I3, 4);
-        cpu2 = new Component("Cpu2", Component.Category.CPU, Component.Type.I5, 8);
-        cpu3 = new Component("Cpu3", Component.Category.CPU, Component.Type.I7, 7);
+        cpu1 = new Component("Cpu1", Component.Category.CPU, Component.Type.I3, 11);
+        cpu2 = new Component("Cpu2", Component.Category.CPU, Component.Type.I5, 18);
+        cpu3 = new Component("Cpu3", Component.Category.CPU, Component.Type.I7, 28);
 
-        ram1 = new Component("ram1", Component.Category.RAM, Component.Type.DDR2, 5);
-        ram2 = new Component("ram2", Component.Category.RAM, Component.Type.DDR3, 7);
-        ram3 = new Component("ram3", Component.Category.RAM, Component.Type.DDR4, 8);
+        ram1 = new Component("ram1", Component.Category.RAM, Component.Type.DDR2, 35);
+        ram2 = new Component("ram2", Component.Category.RAM, Component.Type.DDR3, 25);
+        ram3 = new Component("ram3", Component.Category.RAM, Component.Type.DDR4, 39);
 
-        graphics1 = new Component("graphics1", Component.Category.GraphicsCard, Component.Type.NVIDIA, 6);
-        graphics2 = new Component("graphics2", Component.Category.GraphicsCard, Component.Type.AMDRadeon, 3);
-        graphics3 = new Component("graphics3", Component.Category.GraphicsCard, Component.Type.ASUSGTX, 5);
+        graphics1 = new Component("graphics1", Component.Category.GraphicsCard, Component.Type.NVIDIA, 12);
+        graphics2 = new Component("graphics2", Component.Category.GraphicsCard, Component.Type.AMDRadeon, 6);
+        graphics3 = new Component("graphics3", Component.Category.GraphicsCard, Component.Type.ASUSGTX, 8);
 
-        hardDiks1 = new Component("hardDisk1TB", Component.Category.HardDisk, Component.Type.HDD1TB, 7);
-        hardDisk2 = new Component("hardDisk512GB", Component.Category.HardDisk, Component.Type.HDD512GB, 5);
-        hardDisk3 = new Component("hardDisk512GB", Component.Category.HardDisk, Component.Type.HDD2TB, 10);
+        hardDiks1 = new Component("hardDisk1TB", Component.Category.HardDisk, Component.Type.HDD1TB, 11);
+        hardDisk2 = new Component("hardDisk512GB", Component.Category.HardDisk, Component.Type.HDD512GB, 32);
+        hardDisk3 = new Component("hardDisk512GB", Component.Category.HardDisk, Component.Type.HDD2TB, 23);
 
-        keyboard1 = new Component("keyboard1", Component.Category.Keyboard, Component.Type.ASUSK52, 3);
-        keyboard2 = new Component("keyboard2", Component.Category.Keyboard, Component.Type.ACER5250, 4);
-        keyboard3 = new Component("keyboard3", Component.Category.Keyboard, Component.Type.Compaq, 5);
+        keyboard1 = new Component("keyboard1", Component.Category.Keyboard, Component.Type.ASUSK52, 12);
+        keyboard2 = new Component("keyboard2", Component.Category.Keyboard, Component.Type.ACER5250, 7);
+        keyboard3 = new Component("keyboard3", Component.Category.Keyboard, Component.Type.Compaq, 32);
 
         housing1 = new Component("Housing1", Component.Category.Housing, Component.Type.Housing1, 12);
-        housing2 = new Component("Housing2", Component.Category.Housing, Component.Type.Housing2, 11);
-        housing3 = new Component("Housing3", Component.Category.Housing, Component.Type.Housing3, 15);
+        housing2 = new Component("Housing2", Component.Category.Housing, Component.Type.Housing2, 23);
+        housing3 = new Component("Housing3", Component.Category.Housing, Component.Type.Housing3, 31);
 
         //assign Components to machinery
         m1.addComponent(motherBoard1);
@@ -144,7 +144,7 @@ public class MainClass extends JFrame {
         p1 = new Product("Laptop1", componentsLaptop1);
         p2 = new Product("Laptop2", componentsLaptop2);
         p3 = new Product("Laptop3", componentsLaptop3);
-        p4 = new Product("Laptop4",componentsLaptop4 );
+        p4 = new Product("Laptop4", componentsLaptop4);
 
         products.add(p1);
         products.add(p2);
@@ -156,9 +156,9 @@ public class MainClass extends JFrame {
         ProductsAndStock.put(products.get(0), 30);
         ProductsAndStock.put(products.get(1), 40);
         ProductsAndStock.put(products.get(2), 50);
-        ProductsAndStock.put(products.get(3), 20);
+        ProductsAndStock.put(products.get(3), 32);
 
-        List<Solution> solutions, newRandomSolutions;
+        List<Solution> solutions, newRandomSolutions, crossOverPart;
 
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
         SolutionServices solService = new SolutionServices();
@@ -167,7 +167,8 @@ public class MainClass extends JFrame {
 
         rndSols.setProcessingAlgorithm(algo);
         rndSols.setProductsWithStock(ProductsAndStock);
-        solutions = rndSols.generateRandomSolutions(100);
+        int n = 12;
+        solutions = rndSols.generateRandomSolutions(n);
 
         GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
         gnAlgo.setSelectionOperator(new Selection());
@@ -175,33 +176,37 @@ public class MainClass extends JFrame {
         gnAlgo.setMutationOperator(new Mutation());
 
 
-        for( int i = 1; i <= 200; i++) {
-            newRandomSolutions = rndSols.generateRandomSolutions( solutions.size() / 2);
+        for (int i = 1; i <= 300; i++) {
+
+
+
+            newRandomSolutions = rndSols.generateRandomSolutions(n / 2 );
             gnAlgo.getSelectionOperator().selectionFunctionality(solutions, newRandomSolutions);
+
+
             gnAlgo.getCrossOverOperator().crossOverAll(solutions);
             solService.computeAllStockConstraints(solutions);
             gnAlgo.getMutationOperator().mutationFunctionality(solutions, algo);
+
             solService.computeAllStockConstraints(solutions);
             solService.computeAllProcessingTime(solutions, algo);
-
-
-            for( Solution s : solutions)
-            {
-                System.out.println( s.getFitnessValue().getStockConstraints().getNrProductsNotRespectStock());
-            }
-
-
+            Collections.sort(solutions);
 
             System.out.println("Iteratia " + i + " timp procesare: " +
                     solutions.get(0).getFitnessValue().getProcessingTime() + " constrangeri: " +
                     solutions.get(0).getFitnessValue().getStockConstraints().getNrProductsNotRespectStock());
 
+         /*    newRandomSolutions = rndSols.generateRandomSolutions(n / 4 );
+
+            crossOverPart = new ArrayList<Solution>();
+            crossOverPart = solutions.subList(n/4,3*n/4);
+
+            gnAlgo.getCrossOverOperator().crossOverAll(crossOverPart);*/
+
+
+
+
         }
-
-        System.out.println("Iteratia   timp procesare: " +
-                solutions.get(0).getFitnessValue().getProcessingTime() + " constrangeri: " +
-                solutions.get(0).getFitnessValue().getStockConstraints().getNrProductsNotRespectStock());
-
 
     }
 
