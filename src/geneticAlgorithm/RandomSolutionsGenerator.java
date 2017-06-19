@@ -47,11 +47,12 @@ public class RandomSolutionsGenerator {
             while (OK) {
                 int productNr = Math.abs(rn.nextInt() % productsWithStock.size());
                 Object obj = Stock.keySet().toArray()[productNr];
-                Product p = ((Product) obj);
-                if (Stock.get(p) > 0) {
+                Product p =  new Product( ((Product) obj).getName(), ( (Product) obj).getComponents());
+                Product p1 = (Product) obj;
+                if (Stock.get(p1) > 0) {
                     sol.getProducts().add(k, p);
-                    int stock = Stock.get(p) - 1;
-                    Stock.put(p, stock);
+                    int stock = Stock.get(p1) - 1;
+                    Stock.put(p1, stock);
                     k++;
                     OK = false;
                 }

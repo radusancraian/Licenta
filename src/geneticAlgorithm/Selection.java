@@ -1,25 +1,46 @@
 package geneticAlgorithm;
 
+import entities.Product;
 import entities.Solution;
+import services.Fitness;
+import services.StockConstraints;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class Selection {
 
-    public void selectionFunctionality(List<Solution> actualSolutions, List<Solution> newSolutions) {
+    public void selectionFunctionality(List<Solution> actualSolutions) {
 
-        //sort the current population
-        Collections.sort(actualSolutions);
+        int index = 0;
+        //save the first quart from propulation on the 3rd quart
+        for (int i = actualSolutions.size() / 2; i <= (3 * actualSolutions.size()) / 4 - 1; i++) {
 
-        //add new random solutions on the second half of population
-        for (int i = actualSolutions.size() / 2; i <= actualSolutions.size() - 1; i++) {
-            actualSolutions.set(i, newSolutions.get(i - actualSolutions.size() / 2));
+            Solution actualS = actualSolutions.get(index);
+
+            Solution s = new Solution();
+            Fitness f = new Fitness();
+            StockConstraints stockC = new StockConstraints();
+            Map<Product, Integer> stockAferCrossOver = new  HashMap<>(actualS.getFitnessValue()
+                    .getStockConstraints().getStockAfterCrossOver());
+
+            Map<Product, Integer> initialStock = new HashMap<>(actualS.getInitialStock());
+            stockC.setStockAfterCrossOver(stockAferCrossOver);
+            f.setStockConstraints(stockC);
+            f.setProcessingTime(actualS.getFitnessValue().getProcessingTime());
+            List<Product> products = new ArrayList<>();
+            for ( Product p : actualS.getProducts())
+            {
+                Product pr = new Product(p.getName(), p.getComponents());
+                products.add(pr);
+            }
+            s.setFitnessValue(f);
+            s.setProducts(products);
+            s.setInitialStock(initialStock);
+            actualSolutions.set(i, s);
+            index++;
         }
 
-        //sort the current population
-        Collections.sort(actualSolutions);
     }
 
 }

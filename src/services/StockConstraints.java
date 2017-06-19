@@ -5,6 +5,7 @@ import entities.Product;
 import entities.Solution;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class StockConstraints {
@@ -21,16 +22,25 @@ public class StockConstraints {
         this.stockAfterCrossOver = stockAfterCrossOver;
     }
 
-    //set stock Constraints
-    public void setStockConstraints(Solution s) {
+    //compute stock Constraints
+    public Map<Product, Integer> computeStockConstraints(Solution s) {
 
             Map<Product, Integer> newStock;
             newStock =  new HashMap<>(s.getInitialStock());
 
             for (Product p : s.getProducts()) {
-                newStock.put(p, newStock.get(p) - 1);
+                Iterator it = newStock.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry)it.next();
+                    if ( ((Product)(pair.getKey())).getName().compareTo(p.getName()) == 0) {
+                        int stock =  (Integer)pair.getValue() - 1;
+                        newStock.put((Product)pair.getKey(), stock);
+                    }
+                }
+
+
             }
-        this.setStockAfterCrossOver(newStock);
+       return newStock;
     }
 
 

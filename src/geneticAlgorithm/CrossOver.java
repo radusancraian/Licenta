@@ -17,7 +17,7 @@ public class CrossOver {
         int r = Math.abs(rn.nextInt() % s1.getProducts().size());
 
         for (int i = r; i < s1.getProducts().size(); i++) {
-            Product p = s1.getProducts().get(i);
+            Product p = new Product(s1.getProducts().get(i).getName(), s1.getProducts().get(i).getComponents());
             s1.getProducts().set(i, s2.getProducts().get(i));
             s2.getProducts().set(i, p);
         }
@@ -27,7 +27,7 @@ public class CrossOver {
     //crossOver all Solutions
     public void crossOverAll(List<Solution> solutions) {
 
-        for (int i = 0; i < solutions.size(); i += 2) {
+        for (int i = 0; i < solutions.size() / 2 - 1; i += 2) {
             crossOver(solutions.get(i), solutions.get(i + 1));
         }
 

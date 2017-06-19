@@ -158,7 +158,7 @@ public class MainClass extends JFrame {
         ProductsAndStock.put(products.get(2), 50);
         ProductsAndStock.put(products.get(3), 32);
 
-        List<Solution> solutions, newRandomSolutions, crossOverPart;
+        List<Solution> solutions, newRandomSolutions;
 
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
         SolutionServices solService = new SolutionServices();
@@ -167,7 +167,7 @@ public class MainClass extends JFrame {
 
         rndSols.setProcessingAlgorithm(algo);
         rndSols.setProductsWithStock(ProductsAndStock);
-        int n = 12;
+        int n = 8;
         solutions = rndSols.generateRandomSolutions(n);
 
         GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
@@ -178,38 +178,28 @@ public class MainClass extends JFrame {
 
         for (int i = 1; i <= 300; i++) {
 
-
-
-            newRandomSolutions = rndSols.generateRandomSolutions(n / 2 );
-            gnAlgo.getSelectionOperator().selectionFunctionality(solutions, newRandomSolutions);
-
-
-            gnAlgo.getCrossOverOperator().crossOverAll(solutions);
-            solService.computeAllStockConstraints(solutions);
-            gnAlgo.getMutationOperator().mutationFunctionality(solutions, algo);
-
-            solService.computeAllStockConstraints(solutions);
-            solService.computeAllProcessingTime(solutions, algo);
+            //evaluate solutions ( sort by stock constraints and processing time )
             Collections.sort(solutions);
 
             System.out.println("Iteratia " + i + " timp procesare: " +
                     solutions.get(0).getFitnessValue().getProcessingTime() + " constrangeri: " +
                     solutions.get(0).getFitnessValue().getStockConstraints().getNrProductsNotRespectStock());
 
-         /*    newRandomSolutions = rndSols.generateRandomSolutions(n / 4 );
+            gnAlgo.getSelectionOperator().selectionFunctionality(solutions);
 
-            crossOverPart = new ArrayList<Solution>();
-            crossOverPart = solutions.subList(n/4,3*n/4);
+            gnAlgo.getCrossOverOperator().crossOverAll(solutions);
 
-            gnAlgo.getCrossOverOperator().crossOverAll(crossOverPart);*/
+            solService.computeAllProcessingTime(solutions, algo);
+            solService.computeAllStockConstraints(solutions);
 
+            gnAlgo.getMutationOperator().mutationFunctionality(solutions);
 
-
+            newRandomSolutions = rndSols.generateRandomSolutions(n / 4 );
+            solService.addNewPopulation(solutions, newRandomSolutions);
 
         }
 
     }
-
 
     public MainClass()
     {
