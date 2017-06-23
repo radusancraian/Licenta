@@ -3,9 +3,19 @@ package services;
 import entities.*;
 import entities.Component;
 import geneticAlgorithm.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
@@ -15,6 +25,10 @@ import javax.swing.*;
 public class MainUI {
 
     private JFrame frame;
+    private JTextField laptop1Txt;
+    private JTextField laptop2Txt;
+    private JTextField laptop3Txt;
+    private JTextField laptop4Txt;
 
     /**
      * Launch the application.
@@ -33,6 +47,159 @@ public class MainUI {
             }
         });
 
+        }
+
+    /**
+     * Create the application.
+     */
+    public MainUI() {
+        initialize();
+    }
+
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 842, 678);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
+
+
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setBounds(89, 44, 644, 284);
+        frame.getContentPane().add(panel);
+        panel.setLayout(new BorderLayout(0, 0));
+
+        JLabel lblLaptop = new JLabel("Laptop 1");
+        lblLaptop.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblLaptop.setBounds(25, 375, 75, 14);
+        frame.getContentPane().add(lblLaptop);
+
+        JLabel laptop1Label1 = new JLabel("ASUS, I3, RAM 4GB");
+        laptop1Label1.setBounds(25, 400, 143, 25);
+        frame.getContentPane().add(laptop1Label1);
+
+        JLabel laptop1Label2 = new JLabel("ASUS GTX 1GB, 1TB HDD");
+        laptop1Label2.setBounds(25, 411, 153, 28);
+        frame.getContentPane().add(laptop1Label2);
+
+        JLabel laptop1Label3 = new JLabel("tastatura ASUS K52");
+        laptop1Label3.setBounds(25, 436, 127, 14);
+        frame.getContentPane().add(laptop1Label3);
+
+        laptop1Txt = new JTextField();
+        laptop1Txt.setBounds(25, 467, 86, 20);
+        frame.getContentPane().add(laptop1Txt);
+        laptop1Txt.setColumns(10);
+
+        laptop2Txt = new JTextField();
+        laptop2Txt.setColumns(10);
+        laptop2Txt.setBounds(221, 467, 86, 20);
+        frame.getContentPane().add(laptop2Txt);
+
+        JLabel lblLaptop_1 = new JLabel("Laptop 2");
+        lblLaptop_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblLaptop_1.setBounds(221, 375, 75, 14);
+        frame.getContentPane().add(lblLaptop_1);
+
+        JLabel laptop2Label1 = new JLabel("Skylake, I5, RAM 2GB");
+        laptop2Label1.setBounds(221, 400, 143, 25);
+        frame.getContentPane().add(laptop2Label1);
+
+        JLabel laptop2Label2 = new JLabel("NVIDIA 740M 1GB, 2TB HDD");
+        laptop2Label2.setBounds(221, 411, 153, 28);
+        frame.getContentPane().add(laptop2Label2);
+
+        JLabel laptop2Label3 = new JLabel("tastatura Compaq");
+        laptop2Label3.setBounds(221, 436, 109, 14);
+        frame.getContentPane().add(laptop2Label3);
+
+        JLabel lblLaptop_2 = new JLabel("Laptop 3");
+        lblLaptop_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblLaptop_2.setBounds(414, 375, 75, 14);
+        frame.getContentPane().add(lblLaptop_2);
+
+        JLabel laptop3Label1 = new JLabel("Skylake, I7, RAM 8GB");
+        laptop3Label1.setBounds(414, 400, 143, 25);
+        frame.getContentPane().add(laptop3Label1);
+
+        JLabel laptop3Label2 = new JLabel("NVIDIA 740M 1GB, 512GB HDD");
+        laptop3Label2.setBounds(414, 411, 173, 28);
+        frame.getContentPane().add(laptop3Label2);
+
+        JLabel laptop3Label3 = new JLabel("tastatura ACER 250");
+        laptop3Label3.setBounds(414, 436, 127, 14);
+        frame.getContentPane().add(laptop3Label3);
+
+        laptop3Txt = new JTextField();
+        laptop3Txt.setColumns(10);
+        laptop3Txt.setBounds(414, 467, 86, 20);
+        frame.getContentPane().add(laptop3Txt);
+
+        JLabel lblLaptop_3 = new JLabel("Laptop 4");
+        lblLaptop_3.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblLaptop_3.setBounds(611, 375, 75, 14);
+        frame.getContentPane().add(lblLaptop_3);
+
+        JLabel laptop4Label1 = new JLabel("MSI, AMDRyzen1800X, RAM 4GB");
+        laptop4Label1.setBounds(611, 400, 184, 25);
+        frame.getContentPane().add(laptop4Label1);
+
+        JLabel laptop4Label2 = new JLabel("NVIDIA 740M 1GB, 1TB HDD");
+        laptop4Label2.setBounds(611, 411, 153, 28);
+        frame.getContentPane().add(laptop4Label2);
+
+        JLabel laptop4Label3 = new JLabel("tastatura Compaq");
+        laptop4Label3.setBounds(611, 436, 109, 14);
+        frame.getContentPane().add(laptop4Label3);
+
+        laptop4Txt = new JTextField();
+        laptop4Txt.setColumns(10);
+        laptop4Txt.setBounds(611, 467, 86, 20);
+        frame.getContentPane().add(laptop4Txt);
+
+
+        JButton btnNewButton = new JButton("Asambleaza numarul de laptop-uri selectat");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                 int nrLaptop1 = Integer.parseInt(laptop1Txt.getText());
+                 int nrLaptop2 = Integer.parseInt(laptop2Txt.getText());
+                 int nrLaptop3 = Integer.parseInt(laptop3Txt.getText());
+                 int nrLaptop4 = Integer.parseInt(laptop4Txt.getText());
+
+                 XYSeries series = new XYSeries("Processing times");
+                int[] result = computeAlgorithm(nrLaptop1, nrLaptop2, nrLaptop3, nrLaptop4);
+
+                for(int i = 0 ; i < 200; i ++) {
+                    series.add(i, result[i]);
+                }
+
+
+                 XYSeriesCollection data = new XYSeriesCollection(series);
+
+                JFreeChart chart = ChartFactory.createXYLineChart("Planificare productie", "iteratia","timpul",
+                       data, PlotOrientation.VERTICAL, true, true,false);
+
+                ChartPanel chartPanel = new ChartPanel(chart);
+
+                panel.removeAll();
+                panel.add(chartPanel, BorderLayout.CENTER);
+                panel.validate();
+
+
+            }
+        });
+        btnNewButton.setBounds(247, 552, 326, 36);
+        frame.getContentPane().add(btnNewButton);
+    }
+
+
+    public static int[] computeAlgorithm(int nrLaptop1, int nrLaptop2, int nrLaptop3, int nrLaptop4)
+    {
+
+        int[] result = new int[1000];
 
         ProductionLine prodLine = new ProductionLine();
         List<Product> products = new ArrayList<>();
@@ -51,7 +218,7 @@ public class MainUI {
         List<Component> componentsLaptop3 = new ArrayList<>();
         List<Component> componentsLaptop4 = new ArrayList<>();
 
-        Component motherBoard1, motherBoard2, motherBoard3, cpu1, cpu2, cpu3, ram1, ram2, ram3, graphics1, graphics2,
+        Component motherBoard1, motherBoard2, motherBoard3, cpu1, cpu2, cpu3, cpu4, ram1, ram2, ram3, graphics1, graphics2,
                 graphics3, hardDiks1, hardDisk2, hardDisk3, keyboard1, keyboard2, keyboard3, housing1, housing2,
                 housing3;
 
@@ -62,10 +229,12 @@ public class MainUI {
         cpu1 = new Component("Cpu1", Component.Category.CPU, Component.Type.I3, 11);
         cpu2 = new Component("Cpu2", Component.Category.CPU, Component.Type.I5, 18);
         cpu3 = new Component("Cpu3", Component.Category.CPU, Component.Type.I7, 28);
+        cpu4 = new Component("Cpu4", Component.Category.CPU, Component.Type.AMDRyzen1800X, 11);
 
-        ram1 = new Component("ram1", Component.Category.RAM, Component.Type.DDR2, 35);
-        ram2 = new Component("ram2", Component.Category.RAM, Component.Type.DDR3, 25);
-        ram3 = new Component("ram3", Component.Category.RAM, Component.Type.DDR4, 39);
+
+        ram1 = new Component("ram1", Component.Category.RAM, Component.Type.GB4, 35);
+        ram2 = new Component("ram2", Component.Category.RAM, Component.Type.GB2, 25);
+        ram3 = new Component("ram3", Component.Category.RAM, Component.Type.GB8, 39);
 
         graphics1 = new Component("graphics1", Component.Category.GraphicsCard, Component.Type.NVIDIA, 12);
         graphics2 = new Component("graphics2", Component.Category.GraphicsCard, Component.Type.AMDRadeon, 6);
@@ -75,8 +244,8 @@ public class MainUI {
         hardDisk2 = new Component("hardDisk512GB", Component.Category.HardDisk, Component.Type.HDD512GB, 32);
         hardDisk3 = new Component("hardDisk512GB", Component.Category.HardDisk, Component.Type.HDD2TB, 23);
 
-        keyboard1 = new Component("keyboard1", Component.Category.Keyboard, Component.Type.ASUSK52, 12);
-        keyboard2 = new Component("keyboard2", Component.Category.Keyboard, Component.Type.ACER5250, 7);
+        keyboard1 = new Component("keyboard1", Component.Category.Keyboard, Component.Type. ACER5250, 12);
+        keyboard2 = new Component("keyboard2", Component.Category.Keyboard, Component.Type.ASUSK52, 7);
         keyboard3 = new Component("keyboard3", Component.Category.Keyboard, Component.Type.Compaq, 32);
 
         housing1 = new Component("Housing1", Component.Category.Housing, Component.Type.Housing1, 12);
@@ -125,7 +294,7 @@ public class MainUI {
         componentsLaptop1.add(motherBoard1);
         componentsLaptop1.add(cpu1);
         componentsLaptop1.add(ram1);
-        componentsLaptop1.add(graphics1);
+        componentsLaptop1.add(graphics3);
         componentsLaptop1.add(hardDiks1);
         componentsLaptop1.add(keyboard2);
         componentsLaptop1.add(housing1);
@@ -133,7 +302,7 @@ public class MainUI {
 
         //components for laptop 2
         componentsLaptop2.add(motherBoard2);
-        componentsLaptop2.add(cpu1);
+        componentsLaptop2.add(cpu2);
         componentsLaptop2.add(ram2);
         componentsLaptop2.add(graphics1);
         componentsLaptop2.add(keyboard3);
@@ -142,16 +311,16 @@ public class MainUI {
 
         //components for laptop3
         componentsLaptop3.add(motherBoard2);
-        componentsLaptop3.add(cpu1);
-        componentsLaptop3.add(ram1);
+        componentsLaptop3.add(cpu3);
+        componentsLaptop3.add(ram3);
         componentsLaptop3.add(graphics1);
         componentsLaptop3.add(keyboard1);
         componentsLaptop3.add(hardDisk2);
         componentsLaptop3.add(housing2);
 
         //components for laptop4
-        componentsLaptop4.add(motherBoard1);
-        componentsLaptop4.add(cpu1);
+        componentsLaptop4.add(motherBoard3);
+        componentsLaptop4.add(cpu4);
         componentsLaptop4.add(ram1);
         componentsLaptop4.add(graphics2);
         componentsLaptop4.add(keyboard3);
@@ -171,10 +340,10 @@ public class MainUI {
 
         HashMap<Product, Integer> ProductsAndStock = new HashMap<>();
 
-        ProductsAndStock.put(products.get(0), 300);
-        ProductsAndStock.put(products.get(1), 421);
-        ProductsAndStock.put(products.get(2), 32);
-        ProductsAndStock.put(products.get(3), 199);
+        ProductsAndStock.put(products.get(0), nrLaptop1);
+        ProductsAndStock.put(products.get(1), nrLaptop2);
+        ProductsAndStock.put(products.get(2), nrLaptop3);
+        ProductsAndStock.put(products.get(3), nrLaptop4);
 
         List<Solution> solutions, newRandomSolutions;
 
@@ -194,11 +363,11 @@ public class MainUI {
         gnAlgo.setMutationOperator(new Mutation());
 
 
-        for (int i = 1; i <= 3000; i++) {
+        for (int i = 1; i <= 200; i++) {
 
             //evaluate solutions ( sort by stock constraints and processing time )
             Collections.sort(solutions);
-
+            result[i - 1] = solutions.get(0).getFitnessValue().getProcessingTime();
             System.out.println("Iteratia " + i + " timp procesare: " +
                     solutions.get(0).getFitnessValue().getProcessingTime() + " constrangeri: " +
                     solutions.get(0).getFitnessValue().getStockConstraints().getNrProductsNotRespectStock());
@@ -215,33 +384,11 @@ public class MainUI {
             solService.computeAllStockConstraints(solutions);
             Collections.sort(solutions);
 
-            newRandomSolutions = rndSols.generateRandomSolutions(n / 4 );
+            newRandomSolutions = rndSols.generateRandomSolutions(n / 4);
             solService.addNewPopulation(solutions, newRandomSolutions);
 
         }
 
-
-
-    }
-
-    /**
-     * Create the application.
-     */
-    public MainUI() {
-        initialize();
-    }
-
-    /**
-     * Initialize the contents of the frame.
-     */
-    private void initialize() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 450, 300);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);
-
-        JPanel panel = new JPanel();
-        panel.setBounds(36, 21, 81, 68);
-        frame.getContentPane().add(panel);
+        return result;
     }
 }
