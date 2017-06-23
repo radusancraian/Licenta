@@ -9,12 +9,30 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class MainClass extends JFrame {
+import javax.swing.*;
 
 
+public class MainUI {
+
+    private JFrame frame;
+
+    /**
+     * Launch the application.
+     */
     public static void main(String[] args) {
 
-        // new MainClass();
+
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MainUI window = new MainUI();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
         ProductionLine prodLine = new ProductionLine();
         List<Product> products = new ArrayList<>();
@@ -153,10 +171,10 @@ public class MainClass extends JFrame {
 
         HashMap<Product, Integer> ProductsAndStock = new HashMap<>();
 
-        ProductsAndStock.put(products.get(0), 30);
-        ProductsAndStock.put(products.get(1), 40);
-        ProductsAndStock.put(products.get(2), 50);
-        ProductsAndStock.put(products.get(3), 32);
+        ProductsAndStock.put(products.get(0), 300);
+        ProductsAndStock.put(products.get(1), 421);
+        ProductsAndStock.put(products.get(2), 32);
+        ProductsAndStock.put(products.get(3), 199);
 
         List<Solution> solutions, newRandomSolutions;
 
@@ -167,7 +185,7 @@ public class MainClass extends JFrame {
 
         rndSols.setProcessingAlgorithm(algo);
         rndSols.setProductsWithStock(ProductsAndStock);
-        int n = 8;
+        int n = 80;
         solutions = rndSols.generateRandomSolutions(n);
 
         GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
@@ -176,7 +194,7 @@ public class MainClass extends JFrame {
         gnAlgo.setMutationOperator(new Mutation());
 
 
-        for (int i = 1; i <= 300; i++) {
+        for (int i = 1; i <= 3000; i++) {
 
             //evaluate solutions ( sort by stock constraints and processing time )
             Collections.sort(solutions);
@@ -189,47 +207,41 @@ public class MainClass extends JFrame {
 
             gnAlgo.getCrossOverOperator().crossOverAll(solutions);
 
-            solService.computeAllProcessingTime(solutions, algo);
             solService.computeAllStockConstraints(solutions);
 
             gnAlgo.getMutationOperator().mutationFunctionality(solutions);
+
+            solService.computeAllProcessingTime(solutions, algo);
+            solService.computeAllStockConstraints(solutions);
+            Collections.sort(solutions);
 
             newRandomSolutions = rndSols.generateRandomSolutions(n / 4 );
             solService.addNewPopulation(solutions, newRandomSolutions);
 
         }
 
+
+
     }
 
-    public MainClass()
-    {
-
-        this.setSize(400, 400);
-
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension dim = tk.getScreenSize();
-
-        int xPos = (dim.width / 2) - (this.getWidth() / 2);
-        int yPos = (dim.height / 2) - (this.getHeight() /2);
-
-        this.setLocation(xPos, yPos);
-        this.setResizable(false);
-
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        this.setTitle("Planificare in productie");
-
-        JPanel thePanel = new JPanel();
-        JTextField t1 = new JTextField();
-
-        t1.setBounds(20, 250, 50, 20);
-        this.add(t1);
-
-
-        this.add(thePanel);
-
-        this.setVisible(true);
+    /**
+     * Create the application.
+     */
+    public MainUI() {
+        initialize();
     }
 
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 450, 300);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
 
+        JPanel panel = new JPanel();
+        panel.setBounds(36, 21, 81, 68);
+        frame.getContentPane().add(panel);
+    }
 }
