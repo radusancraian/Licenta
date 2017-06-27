@@ -29,7 +29,8 @@ public class MainUI {
     private JTextField laptop2Txt;
     private JTextField laptop3Txt;
     private JTextField laptop4Txt;
-
+    private static int[] processingTimes = new int[40320];
+  ;
     /**
      * Launch the application.
      */
@@ -47,7 +48,10 @@ public class MainUI {
             }
         });
 
+
+
         }
+
 
     /**
      * Create the application.
@@ -172,7 +176,15 @@ public class MainUI {
                  XYSeries series = new XYSeries("Processing times");
                 int[] result = computeAlgorithm(nrLaptop1, nrLaptop2, nrLaptop3, nrLaptop4);
 
-                for(int i = 0 ; i < 200; i ++) {
+                 Arrays.sort(processingTimes);
+
+                 for(int i = 0 ; i < processingTimes.length; i++)
+                 {
+                     System.out.println(i+ " " +  processingTimes[i]);
+                 }
+
+
+               for(int i = 0 ; i < 150; i ++) {
                     series.add(i, result[i]);
                 }
 
@@ -212,7 +224,7 @@ public class MainUI {
         m6 = new Machinery();
         m7 = new Machinery();
 
-        Product p1, p2, p3, p4;
+        Product p1, p2, p3, p4, p5, p6, p7, p8;
         List<Component> componentsLaptop1 = new ArrayList<>();
         List<Component> componentsLaptop2 = new ArrayList<>();
         List<Component> componentsLaptop3 = new ArrayList<>();
@@ -354,7 +366,7 @@ public class MainUI {
 
         rndSols.setProcessingAlgorithm(algo);
         rndSols.setProductsWithStock(ProductsAndStock);
-        int n = 80;
+        int n = 100;
         solutions = rndSols.generateRandomSolutions(n);
 
         GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
@@ -363,7 +375,28 @@ public class MainUI {
         gnAlgo.setMutationOperator(new Mutation());
 
 
-        for (int i = 1; i <= 200; i++) {
+        List<Product> productsList = new ArrayList<>(8);
+
+        p5 = new Product("Laptop11", componentsLaptop1);
+        p6 = new Product("Laptop22", componentsLaptop2);
+        p7 = new Product("Laptop32", componentsLaptop3);
+        p8 = new Product("Laptop42", componentsLaptop4);
+
+        productsList.add(products.get(0));
+        productsList.add(p5);
+        productsList.add(products.get(1));
+        productsList.add(p6);
+        productsList.add(products.get(2));
+        productsList.add(p7);
+        productsList.add(products.get(3));
+        productsList.add(p8);
+       List<Product> initialList = new ArrayList<>(productsList);
+        PermutationSchedule.back(1,8, productsList, initialList, algo, processingTimes);
+
+
+
+/*
+        for (int i = 1; i <= 50; i++) {
 
             //evaluate solutions ( sort by stock constraints and processing time )
             Collections.sort(solutions);
@@ -388,6 +421,7 @@ public class MainUI {
             solService.addNewPopulation(solutions, newRandomSolutions);
 
         }
+*/
 
         return result;
     }
