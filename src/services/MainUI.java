@@ -185,7 +185,8 @@ public class MainUI {
                 if (validData) {
                     XYSeries series = new XYSeries("Processing times");
                     int[] result = computeAlgorithm(nrLaptop1, nrLaptop2, nrLaptop3, nrLaptop4);
-
+                    JOptionPane.showMessageDialog(frame, "Asamblarea s-a realizat cu succes", "Succes",
+                            JOptionPane.INFORMATION_MESSAGE);
 
       /*              Arrays.sort(processingTimes);
 

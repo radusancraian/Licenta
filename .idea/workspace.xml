@@ -28,11 +28,11 @@
       <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-731">
-              <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+            <state relative-caret-position="274">
+              <caret line="194" column="23" lean-forward="true" selection-start-line="194" selection-start-column="23" selection-end-line="194" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1499276457734" expanded="true" signature="6412:7439" ph="{...}" />
+                <marker date="1499276771170" expanded="true" signature="6412:7604" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -72,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/src/entities/Product.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="277">
-              <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+              <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
               <folding>
                 <element signature="e#295#296#0" expanded="true" />
                 <element signature="e#322#323#0" expanded="true" />
@@ -102,7 +102,7 @@
         <entry file="file://$PROJECT_DIR$/src/services/SchedulerAlgorithm.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1054">
-              <caret line="84" column="28" lean-forward="true" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
+              <caret line="84" column="28" lean-forward="false" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -743,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499276341631</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Code refactoring.">
+      <created>1499276470610</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1499276470610</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -804,7 +811,8 @@
     <MESSAGE value="Add UI functionality." />
     <MESSAGE value="Add Permutations Schedule." />
     <MESSAGE value="Display the best solution in a text file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Display the best solution in a text file." />
+    <MESSAGE value="Code refactoring." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -853,13 +861,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/services/MainUI.java</url>
-          <line>189</line>
+          <line>190</line>
           <properties />
           <option name="timeStamp" value="317" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/services/MainUI.java</url>
-          <line>191</line>
+          <line>192</line>
           <properties />
           <option name="timeStamp" value="319" />
         </line-breakpoint>
@@ -1134,7 +1142,7 @@
     <entry file="file://$PROJECT_DIR$/src/services/SchedulerAlgorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1054">
-          <caret line="84" column="28" lean-forward="true" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
+          <caret line="84" column="28" lean-forward="false" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1174,7 +1182,7 @@
     <entry file="file://$PROJECT_DIR$/src/entities/Product.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
-          <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
           <folding>
             <element signature="e#295#296#0" expanded="true" />
             <element signature="e#322#323#0" expanded="true" />
@@ -1197,11 +1205,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/services/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-731">
-          <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
+        <state relative-caret-position="274">
+          <caret line="194" column="23" lean-forward="true" selection-start-line="194" selection-start-column="23" selection-end-line="194" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1499276457734" expanded="true" signature="6412:7439" ph="{...}" />
+            <marker date="1499276771170" expanded="true" signature="6412:7604" ph="{...}" />
           </folding>
         </state>
       </provider>
