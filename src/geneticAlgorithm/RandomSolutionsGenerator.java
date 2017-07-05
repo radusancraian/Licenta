@@ -3,7 +3,6 @@ package geneticAlgorithm;
 
 import entities.Product;
 import entities.Solution;
-import services.Fitness;
 import services.SchedulerAlgorithm;
 import services.StockConstraints;
 

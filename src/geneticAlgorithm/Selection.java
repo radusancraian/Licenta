@@ -2,7 +2,6 @@ package geneticAlgorithm;
 
 import entities.Product;
 import entities.Solution;
-import services.Fitness;
 import services.StockConstraints;
 
 import java.util.*;

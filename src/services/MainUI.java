@@ -16,6 +16,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class MainUI {
     private JTextField laptop3Txt;
     private JTextField laptop4Txt;
     private static int[] processingTimes = new int[40320];
-  ;
+    private static Solution bestSolution;
     /**
      * Launch the application.
      */
@@ -168,43 +170,87 @@ public class MainUI {
         JButton btnNewButton = new JButton("Asambleaza numarul de laptop-uri selectat");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                 int nrLaptop1 = Integer.parseInt(laptop1Txt.getText());
-                 int nrLaptop2 = Integer.parseInt(laptop2Txt.getText());
-                 int nrLaptop3 = Integer.parseInt(laptop3Txt.getText());
-                 int nrLaptop4 = Integer.parseInt(laptop4Txt.getText());
+                boolean validData = true;
+                int nrLaptop1 = 0, nrLaptop2 = 0, nrLaptop3 = 0, nrLaptop4 = 0;
+                try {
 
-                 XYSeries series = new XYSeries("Processing times");
-                int[] result = computeAlgorithm(nrLaptop1, nrLaptop2, nrLaptop3, nrLaptop4);
+                    nrLaptop1 = Integer.parseInt(laptop1Txt.getText());
+                    nrLaptop2 = Integer.parseInt(laptop2Txt.getText());
+                    nrLaptop3 = Integer.parseInt(laptop3Txt.getText());
+                    nrLaptop4 = Integer.parseInt(laptop4Txt.getText());
 
-                 Arrays.sort(processingTimes);
+                } catch (NumberFormatException e) {
+                    validData = false;
+                    JOptionPane.showMessageDialog(frame, "Datele introduse nu sunt valide", "Atentionare",
+                            JOptionPane.WARNING_MESSAGE);
 
-                 for(int i = 0 ; i < processingTimes.length; i++)
-                 {
-                     System.out.println(i+ " " +  processingTimes[i]);
-                 }
-
-
-               for(int i = 0 ; i < 150; i ++) {
-                    series.add(i, result[i]);
                 }
 
-
-                 XYSeriesCollection data = new XYSeriesCollection(series);
-
-                JFreeChart chart = ChartFactory.createXYLineChart("Planificare productie", "iteratia","timpul",
-                       data, PlotOrientation.VERTICAL, true, true,false);
-
-                ChartPanel chartPanel = new ChartPanel(chart);
-
-                panel.removeAll();
-                panel.add(chartPanel, BorderLayout.CENTER);
-                panel.validate();
+                if (validData) {
+                    XYSeries series = new XYSeries("Processing times");
+                    int[] result = computeAlgorithm(nrLaptop1, nrLaptop2, nrLaptop3, nrLaptop4);
 
 
+      /*              Arrays.sort(processingTimes);
+
+                    for (int i = 0; i < processingTimes.length; i++) {
+                        System.out.println(i + " " + processingTimes[i]);
+                    }*/
+
+
+                    for (int i = 0; i < 50; i++) {
+                        series.add(i, result[i]);
+                    }
+
+
+                    XYSeriesCollection data = new XYSeriesCollection(series);
+
+                    JFreeChart chart = ChartFactory.createXYLineChart("Planificare productie", "iteratia", "timpul",
+                            data, PlotOrientation.VERTICAL, true, true, false);
+
+                    ChartPanel chartPanel = new ChartPanel(chart);
+
+                    panel.removeAll();
+                    panel.add(chartPanel, BorderLayout.CENTER);
+                    panel.validate();
+
+
+                }
             }
         });
-        btnNewButton.setBounds(247, 552, 326, 36);
+        btnNewButton.setBounds(161, 552, 326, 36);
         frame.getContentPane().add(btnNewButton);
+
+        JButton btnAfiseazaSecventa = new JButton("Afiseaza secventa optima");
+        btnAfiseazaSecventa.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+
+                try{
+                    PrintWriter writer = new PrintWriter("secventa-optima.txt", "UTF-8");
+                    writer.println("Secventa de produse este:");
+                    for(Product p : bestSolution.getProducts()) {
+                        writer.println(p.getName() + " ");
+                    }
+                    writer.println("Timpul total de asamblare este : " + bestSolution.getFitnessValue().getProcessingTime());
+                    writer.close();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(frame, "Eroare la scrierea secventei in fisier", "Eroare",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
+                ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "secventa-optima.txt");
+                try {
+                    pb.start();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(frame, "Eroare la deschiderea fisierului", "Eroare",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        btnAfiseazaSecventa.setBounds(583, 552, 192, 36);
+        frame.getContentPane().add(btnAfiseazaSecventa);
+
+
     }
 
 
@@ -391,11 +437,11 @@ public class MainUI {
         productsList.add(products.get(3));
         productsList.add(p8);
        List<Product> initialList = new ArrayList<>(productsList);
-        PermutationSchedule.back(1,8, productsList, initialList, algo, processingTimes);
+      //  PermutationSchedule.back(1,8, productsList, initialList, algo, processingTimes);
 
 
 
-/*
+
         for (int i = 1; i <= 50; i++) {
 
             //evaluate solutions ( sort by stock constraints and processing time )
@@ -421,8 +467,7 @@ public class MainUI {
             solService.addNewPopulation(solutions, newRandomSolutions);
 
         }
-*/
-
+        bestSolution = solutions.get(0);
         return result;
     }
 }

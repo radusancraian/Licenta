@@ -1,7 +1,7 @@
 package entities;
 
 
-import services.Fitness;
+import geneticAlgorithm.Fitness;
 
 import java.util.ArrayList;
 import java.util.HashMap;

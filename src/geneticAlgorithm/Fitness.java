@@ -1,5 +1,7 @@
-package services;
+package geneticAlgorithm;
 
+
+import services.StockConstraints;
 
 public class Fitness  {
 
