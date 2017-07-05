@@ -2,9 +2,7 @@ package geneticAlgorithm;
 
 
 import entities.Product;
-import entities.Solution;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 

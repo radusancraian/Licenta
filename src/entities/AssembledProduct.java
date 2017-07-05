@@ -3,12 +3,7 @@ package entities;
 
 import java.util.List;
 
-public class AssembledProduct extends Product {
-
-
-    public AssembledProduct(String name, List<Component> components) {
-        super(name, components);
-    }
+public class AssembledProduct {
 
     public static boolean checkNecessaryComponent(Component c, Product p) {
         List<Component> finalProductComponents = p.getComponents();

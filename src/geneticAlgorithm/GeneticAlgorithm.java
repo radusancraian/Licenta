@@ -1,8 +1,6 @@
 package geneticAlgorithm;
 
 
-import entities.Solution;
-
 import java.util.List;
 
 public class GeneticAlgorithm {

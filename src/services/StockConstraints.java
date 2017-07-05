@@ -2,7 +2,7 @@ package services;
 
 
 import entities.Product;
-import entities.Solution;
+import geneticAlgorithm.Solution;
 
 import java.util.HashMap;
 import java.util.Iterator;

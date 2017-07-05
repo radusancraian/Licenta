@@ -1,7 +1,7 @@
-package entities;
+package geneticAlgorithm;
 
 
-import geneticAlgorithm.Fitness;
+import entities.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;

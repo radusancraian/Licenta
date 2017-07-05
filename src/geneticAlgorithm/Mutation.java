@@ -2,8 +2,6 @@ package geneticAlgorithm;
 
 
 import entities.Product;
-import entities.Solution;
-import services.SchedulerAlgorithm;
 
 import java.util.*;
 
