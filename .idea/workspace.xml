@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b8e7d6bb-a63a-4249-8c00-ba01e8197ab0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entities/Solution.java" afterPath="$PROJECT_DIR$/src/entities/Solution.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/geneticAlgorithm/RandomSolutionsGenerator.java" afterPath="$PROJECT_DIR$/src/geneticAlgorithm/RandomSolutionsGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/geneticAlgorithm/Selection.java" afterPath="$PROJECT_DIR$/src/geneticAlgorithm/Selection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/services/MainUI.java" afterPath="$PROJECT_DIR$/src/services/MainUI.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/services/Fitness.java" afterPath="$PROJECT_DIR$/src/geneticAlgorithm/Fitness.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,11 +28,11 @@
       <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-186">
-              <caret line="442" column="0" lean-forward="true" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+            <state relative-caret-position="-731">
+              <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1499276273865" expanded="true" signature="6532:7559" ph="{...}" />
+                <marker date="1499276457734" expanded="true" signature="6412:7439" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -740,7 +736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498568355372</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Display the best solution in a text file.">
+      <created>1499276341631</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1499276341631</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -800,7 +803,8 @@
     <MESSAGE value="Change main design class." />
     <MESSAGE value="Add UI functionality." />
     <MESSAGE value="Add Permutations Schedule." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Permutations Schedule." />
+    <MESSAGE value="Display the best solution in a text file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Display the best solution in a text file." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -837,25 +841,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/services/MainUI.java</url>
-          <line>40</line>
+          <line>36</line>
           <properties />
           <option name="timeStamp" value="302" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/services/MainUI.java</url>
-          <line>53</line>
+          <line>49</line>
           <properties />
           <option name="timeStamp" value="303" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/services/MainUI.java</url>
-          <line>193</line>
+          <line>189</line>
           <properties />
           <option name="timeStamp" value="317" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/services/MainUI.java</url>
-          <line>195</line>
+          <line>191</line>
           <properties />
           <option name="timeStamp" value="319" />
         </line-breakpoint>
@@ -1193,11 +1197,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/services/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-186">
-          <caret line="442" column="0" lean-forward="true" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+        <state relative-caret-position="-731">
+          <caret line="67" column="36" lean-forward="false" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1499276273865" expanded="true" signature="6532:7559" ph="{...}" />
+            <marker date="1499276457734" expanded="true" signature="6412:7439" ph="{...}" />
           </folding>
         </state>
       </provider>
