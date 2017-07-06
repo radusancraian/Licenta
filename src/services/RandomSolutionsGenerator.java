@@ -1,9 +1,9 @@
-package geneticAlgorithm;
+package services;
 
 
 import entities.Product;
-import services.SchedulerAlgorithm;
-import services.StockConstraints;
+import geneticAlgorithm.Fitness;
+import geneticAlgorithm.Solution;
 
 import java.util.*;
 

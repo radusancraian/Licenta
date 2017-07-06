@@ -315,6 +315,7 @@ public class MainUI {
         m2.addComponent(cpu1);
         m2.addComponent(cpu2);
         m2.addComponent(cpu3);
+        m2.addComponent(cpu4);
 
         m3.addComponent(ram1);
         m3.addComponent(ram2);
@@ -445,8 +446,7 @@ public class MainUI {
             Collections.sort(solutions);
             result[i - 1] = solutions.get(0).getFitnessValue().getProcessingTime();
             System.out.println("Iteratia " + i + " timp procesare: " +
-                    solutions.get(0).getFitnessValue().getProcessingTime() + " constrangeri: " +
-                    solutions.get(0).getFitnessValue().getStockConstraints().getNrProductsNotRespectStock());
+                    solutions.get(0).getFitnessValue().getProcessingTime());
 
             gnAlgo.getSelectionOperator().selectionFunctionality(solutions);
 
