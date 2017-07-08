@@ -92,19 +92,19 @@ public class MainUI {
         frame.getContentPane().add(laptop1Label3);
 
         laptop1Txt = new JTextField();
-        laptop1Txt.setBounds(25, 467, 86, 20);
+        laptop1Txt.setBounds(25, 486, 86, 20);
         frame.getContentPane().add(laptop1Txt);
         laptop1Txt.setColumns(10);
 
         laptop2Txt = new JTextField();
         laptop2Txt.setColumns(10);
-        laptop2Txt.setBounds(221, 467, 86, 20);
+        laptop2Txt.setBounds(221, 486, 86, 20);
         frame.getContentPane().add(laptop2Txt);
 
-        JLabel lblLaptop_1 = new JLabel("Laptop 2");
-        lblLaptop_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblLaptop_1.setBounds(221, 375, 75, 14);
-        frame.getContentPane().add(lblLaptop_1);
+        JLabel lblLaptop_2 = new JLabel("Laptop 2");
+        lblLaptop_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblLaptop_2.setBounds(221, 375, 75, 14);
+        frame.getContentPane().add(lblLaptop_2);
 
         JLabel laptop2Label1 = new JLabel("Skylake, I5, RAM 2GB");
         laptop2Label1.setBounds(221, 400, 143, 25);
@@ -118,10 +118,10 @@ public class MainUI {
         laptop2Label3.setBounds(221, 436, 109, 14);
         frame.getContentPane().add(laptop2Label3);
 
-        JLabel lblLaptop_2 = new JLabel("Laptop 3");
-        lblLaptop_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblLaptop_2.setBounds(414, 375, 75, 14);
-        frame.getContentPane().add(lblLaptop_2);
+        JLabel lblLaptop_3 = new JLabel("Laptop 3");
+        lblLaptop_3.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblLaptop_3.setBounds(414, 375, 75, 14);
+        frame.getContentPane().add(lblLaptop_3);
 
         JLabel laptop3Label1 = new JLabel("Skylake, I7, RAM 8GB");
         laptop3Label1.setBounds(414, 400, 143, 25);
@@ -137,13 +137,13 @@ public class MainUI {
 
         laptop3Txt = new JTextField();
         laptop3Txt.setColumns(10);
-        laptop3Txt.setBounds(414, 467, 86, 20);
+        laptop3Txt.setBounds(414, 486, 86, 20);
         frame.getContentPane().add(laptop3Txt);
 
-        JLabel lblLaptop_3 = new JLabel("Laptop 4");
-        lblLaptop_3.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblLaptop_3.setBounds(611, 375, 75, 14);
-        frame.getContentPane().add(lblLaptop_3);
+        JLabel lblLaptop_4 = new JLabel("Laptop 4");
+        lblLaptop_4.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblLaptop_4.setBounds(611, 375, 75, 14);
+        frame.getContentPane().add(lblLaptop_4);
 
         JLabel laptop4Label1 = new JLabel("MSI, AMDRyzen1800X, RAM 4GB");
         laptop4Label1.setBounds(611, 400, 184, 25);
@@ -159,9 +159,28 @@ public class MainUI {
 
         laptop4Txt = new JTextField();
         laptop4Txt.setColumns(10);
-        laptop4Txt.setBounds(611, 467, 86, 20);
+        laptop4Txt.setBounds(611, 486, 86, 20);
         frame.getContentPane().add(laptop4Txt);
 
+        JLabel lblTimpAsamblareLaptop1 = new JLabel("timp asamblare:  96 sec.");
+        lblTimpAsamblareLaptop1.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblTimpAsamblareLaptop1.setBounds(25, 461, 143, 14);
+        frame.getContentPane().add(lblTimpAsamblareLaptop1);
+
+        JLabel labelTimpAsamblareLaptop2 = new JLabel("timp asamblare:  175 sec.");
+        labelTimpAsamblareLaptop2.setFont(new Font("Tahoma", Font.BOLD, 11));
+        labelTimpAsamblareLaptop2.setBounds(221, 461, 153, 14);
+        frame.getContentPane().add(labelTimpAsamblareLaptop2);
+
+        JLabel labelTimpAsamblareLaptop3 = new JLabel("timp asamblare:  180 sec.");
+        labelTimpAsamblareLaptop3.setFont(new Font("Tahoma", Font.BOLD, 11));
+        labelTimpAsamblareLaptop3.setBounds(414, 461, 153, 14);
+        frame.getContentPane().add(labelTimpAsamblareLaptop3);
+
+        JLabel labelTimpAsamblareLaptop4 = new JLabel("timp asamblare:  132 sec.");
+        labelTimpAsamblareLaptop4.setFont(new Font("Tahoma", Font.BOLD, 11));
+        labelTimpAsamblareLaptop4.setBounds(611, 461, 153, 14);
+        frame.getContentPane().add(labelTimpAsamblareLaptop4);
 
         JButton btnNewButton = new JButton("Asambleaza numarul de laptop-uri selectat");
         btnNewButton.addActionListener(new ActionListener() {
@@ -284,7 +303,7 @@ public class MainUI {
         cpu1 = new Component("Cpu1", Component.Category.CPU, Component.Type.I3, 11);
         cpu2 = new Component("Cpu2", Component.Category.CPU, Component.Type.I5, 18);
         cpu3 = new Component("Cpu3", Component.Category.CPU, Component.Type.I7, 28);
-        cpu4 = new Component("Cpu4", Component.Category.CPU, Component.Type.AMDRyzen1800X, 11);
+        cpu4 = new Component("Cpu4", Component.Category.CPU, Component.Type.AMDRyzen1800X, 15);
 
 
         ram1 = new Component("ram1", Component.Category.RAM, Component.Type.GB4, 35);
