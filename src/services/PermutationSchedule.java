@@ -9,7 +9,7 @@ public class PermutationSchedule {
 
 
     private static int iteratie = -1;
-    private static int[] indexes = new int[11], usedIndexes = new int[11];
+    private static int[] indexes = new int[12], usedIndexes = new int[12];
 
     static void back(int k, int len, List<Product> productsList, List<Product> initialList, SchedulerAlgorithm algo,
                      int[] processingTimes)

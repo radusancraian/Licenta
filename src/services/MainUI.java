@@ -9,15 +9,17 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.util.List;
-
 
 
 public class MainUI {
@@ -27,8 +29,9 @@ public class MainUI {
     private JTextField laptop2Txt;
     private JTextField laptop3Txt;
     private JTextField laptop4Txt;
-    private static int[] processingTimes = new int[40320];
+    private static int[] processingTimes = new int[362880];
     private static Solution bestSolution;
+
     /**
      * Launch the application.
      */
@@ -47,8 +50,7 @@ public class MainUI {
         });
 
 
-
-        }
+    }
 
 
     /**
@@ -149,8 +151,8 @@ public class MainUI {
         laptop4Label1.setBounds(611, 400, 184, 25);
         frame.getContentPane().add(laptop4Label1);
 
-        JLabel laptop4Label2 = new JLabel("NVIDIA 740M 1GB, 1TB HDD");
-        laptop4Label2.setBounds(611, 411, 153, 28);
+        JLabel laptop4Label2 = new JLabel("AMD RADEON 1GB, 1TB HDD");
+        laptop4Label2.setBounds(611, 411, 158, 28);
         frame.getContentPane().add(laptop4Label2);
 
         JLabel laptop4Label3 = new JLabel("tastatura Compaq");
@@ -202,15 +204,27 @@ public class MainUI {
                 }
 
                 if (validData) {
-                    XYSeries series = new XYSeries("Processing times");
+                    XYSeries series = new XYSeries("Valorile de productie ale solutiilor optime");
                     int[] result = computeAlgorithm(nrLaptop1, nrLaptop2, nrLaptop3, nrLaptop4);
                     JOptionPane.showMessageDialog(frame, "Asamblarea s-a realizat cu succes", "Succes",
                             JOptionPane.INFORMATION_MESSAGE);
 
-      /*              Arrays.sort(processingTimes);
+                 /*   Arrays.sort(processingTimes);
 
-                    for (int i = 0; i < processingTimes.length; i++) {
-                        System.out.println(i + " " + processingTimes[i]);
+                    try {
+                        try {
+                            PrintWriter writer2 = new PrintWriter("timp-backtracking.txt", "UTF-8");
+
+                            for (int i = 0; i < processingTimes.length; i++)
+                                writer2.println("Iteratia: " + i + "  :" + processingTimes[i]);
+                            writer2.close();
+                            System.out.println("DONEE");
+
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
                     }*/
 
 
@@ -241,10 +255,10 @@ public class MainUI {
         btnAfiseazaSecventa.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
-                try{
+                try {
                     PrintWriter writer = new PrintWriter("secventa-optima.txt", "UTF-8");
                     writer.println("Secventa de produse este:");
-                    for(Product p : bestSolution.getProducts()) {
+                    for (Product p : bestSolution.getProducts()) {
                         writer.println(p.getName() + " ");
                     }
                     writer.println("Timpul total de asamblare este : " + bestSolution.getFitnessValue().getProcessingTime());
@@ -270,8 +284,7 @@ public class MainUI {
     }
 
 
-    public static int[] computeAlgorithm(int nrLaptop1, int nrLaptop2, int nrLaptop3, int nrLaptop4)
-    {
+    public static int[] computeAlgorithm(int nrLaptop1, int nrLaptop2, int nrLaptop3, int nrLaptop4) {
 
         int[] result = new int[1000];
 
@@ -425,11 +438,11 @@ public class MainUI {
         SchedulerAlgorithm algo = new SchedulerAlgorithm(products, prodLine);
         SolutionServices solService = new SolutionServices();
 
-        RandomSolutionsGenerator rndSols = new RandomSolutionsGenerator();
+       RandomSolutionsGenerator rndSols = new RandomSolutionsGenerator();
 
         rndSols.setProcessingAlgorithm(algo);
         rndSols.setProductsWithStock(ProductsAndStock);
-        int n = 100;
+        int n = 400;
         solutions = rndSols.generateRandomSolutions(n);
 
         GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
@@ -438,26 +451,57 @@ public class MainUI {
         gnAlgo.setMutationOperator(new Mutation());
 
 
-        List<Product> productsList = new ArrayList<>(8);
+/*        List<Product> productsList = new ArrayList<>(10);
 
-        p5 = new Product("Laptop11", componentsLaptop1);
-        p6 = new Product("Laptop22", componentsLaptop2);
-        p7 = new Product("Laptop32", componentsLaptop3);
+        p1 = new Product("Laptop11", componentsLaptop1);
+        p2 = new Product("Laptop12", componentsLaptop1);
+
+        p3 = new Product("Laptop21", componentsLaptop2);
+        p4 = new Product("Laptop22", componentsLaptop2);
+        p5 = new Product("Laptop23", componentsLaptop2);
+        p6 = new Product("Laptop31", componentsLaptop3);
+        p7 = new Product("Laptop41", componentsLaptop4);
         p8 = new Product("Laptop42", componentsLaptop4);
+        Product p9 = new Product("Laptop43", componentsLaptop4);
+        Product p10 = new Product("Laptop44", componentsLaptop4);
 
-        productsList.add(products.get(0));
+        productsList.add(p1);
+        productsList.add(p2);
+        productsList.add(p3);
+        productsList.add(p4);
         productsList.add(p5);
-        productsList.add(products.get(1));
         productsList.add(p6);
-        productsList.add(products.get(2));
         productsList.add(p7);
-        productsList.add(products.get(3));
         productsList.add(p8);
-       List<Product> initialList = new ArrayList<>(productsList);
-      //  PermutationSchedule.back(1,8, productsList, initialList, algo, processingTimes);
+        productsList.add(p9);
+        productsList.add(p10);
+
+        List<Product> initialList = new ArrayList<>(productsList);
+        PermutationSchedule.back(1, 9, productsList, initialList, algo, processingTimes);
+         */
+        List<Product> prList = new ArrayList<>(10);
+      for(int i = 1 ; i <= 32 ; i++)
+       {
+           prList.add(new Product("Laptop1"+ i, componentsLaptop1));
+       }
+        for(int i = 1 ; i <= 321 ; i++)
+        {
+            prList.add(new Product("Laptop2"+ i, componentsLaptop2));
+        }
+        for(int i = 1 ; i <= 233 ; i++)
+        {
+            prList.add(new Product("Laptop3"+ i, componentsLaptop3));
+        }
+        for(int i = 1 ; i <= 111 ; i++)
+        {
+            prList.add(new Product("Laptop4"+ i, componentsLaptop4));
+        }
 
 
 
+      algo.setProducts(prList);
+        algo.computeProcessingTime();
+       System.out.print("TIMP ESTEEE: " + algo.getProcessingTime());
 
         for (int i = 1; i <= 50; i++) {
 
