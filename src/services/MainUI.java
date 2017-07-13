@@ -442,28 +442,30 @@ public class MainUI {
 
         rndSols.setProcessingAlgorithm(algo);
         rndSols.setProductsWithStock(ProductsAndStock);
-        int n = 400;
-        solutions = rndSols.generateRandomSolutions(n);
-
-        GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
-        gnAlgo.setSelectionOperator(new Selection());
-        gnAlgo.setCrossOverOperator(new CrossOver());
-        gnAlgo.setMutationOperator(new Mutation());
 
 
-/*        List<Product> productsList = new ArrayList<>(10);
+
+
+        /*
+        List<Product> productsList = new ArrayList<>(10);
 
         p1 = new Product("Laptop11", componentsLaptop1);
         p2 = new Product("Laptop12", componentsLaptop1);
+        p3 = new Product("Laptop13", componentsLaptop1);
 
-        p3 = new Product("Laptop21", componentsLaptop2);
-        p4 = new Product("Laptop22", componentsLaptop2);
-        p5 = new Product("Laptop23", componentsLaptop2);
-        p6 = new Product("Laptop31", componentsLaptop3);
-        p7 = new Product("Laptop41", componentsLaptop4);
-        p8 = new Product("Laptop42", componentsLaptop4);
-        Product p9 = new Product("Laptop43", componentsLaptop4);
-        Product p10 = new Product("Laptop44", componentsLaptop4);
+        p4 = new Product("Laptop21", componentsLaptop2);
+        p5 = new Product("Laptop22", componentsLaptop2);
+        p6 = new Product("Laptop23", componentsLaptop2);
+        p7 = new Product("Laptop24", componentsLaptop3);
+
+        p8 = new Product("Laptop31", componentsLaptop3);
+       Product p9 = new Product("Laptop32", componentsLaptop4);
+
+       Product p10 = new Product("Laptop41", componentsLaptop4);
+       Product p11 = new Product("Laptop42", componentsLaptop4);
+        Product p12 = new Product("Laptop43", componentsLaptop4);
+        Product p13 = new Product("Laptop44", componentsLaptop4);
+        Product p14 = new Product("Laptop45", componentsLaptop4);
 
         productsList.add(p1);
         productsList.add(p2);
@@ -475,10 +477,14 @@ public class MainUI {
         productsList.add(p8);
         productsList.add(p9);
         productsList.add(p10);
-
+        productsList.add(p11);
+        productsList.add(p12);
+        productsList.add(p13);
+        productsList.add(p14);
+        int min = 99999, max = -99999;
         List<Product> initialList = new ArrayList<>(productsList);
         PermutationSchedule.back(1, 9, productsList, initialList, algo, processingTimes);
-         */
+
         List<Product> prList = new ArrayList<>(10);
       for(int i = 1 ; i <= 32 ; i++)
        {
@@ -499,9 +505,19 @@ public class MainUI {
 
 
 
+
       algo.setProducts(prList);
         algo.computeProcessingTime();
-       System.out.print("TIMP ESTEEE: " + algo.getProcessingTime());
+       System.out.print("TIMP ESTEEE: " + algo.getProcessingTime());*/
+
+
+        int n = 1000;
+        solutions = rndSols.generateRandomSolutions(n);
+
+        GeneticAlgorithm gnAlgo = new GeneticAlgorithm(solutions);
+        gnAlgo.setSelectionOperator(new Selection());
+        gnAlgo.setCrossOverOperator(new CrossOver());
+        gnAlgo.setMutationOperator(new Mutation());
 
         for (int i = 1; i <= 50; i++) {
 
